@@ -35,7 +35,7 @@ Usage:
     jingbao-fuwuqi [options]
 
 Options:
-    -h, --help          display this help message.
+    -h, --help          display help message
     --version           display version and exit
     -s, --system=NAME   system requested [default: KS-1]
 """
