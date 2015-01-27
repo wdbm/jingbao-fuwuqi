@@ -35,8 +35,8 @@ Usage:
     jingbao-fuwuqi [options]
 
 Options:
-    -h, --help          Show this help message.
-    --version           Show the version and exit.
+    -h, --help          display this help message.
+    --version           display version and exit
     -s, --system=NAME   system requested [default: KS-1]
 """
 
@@ -108,7 +108,6 @@ def speak(text):
     )
 
 if __name__ == "__main__":
-
     options = docopt.docopt(__doc__)
     if options["--version"]:
         print(version)
