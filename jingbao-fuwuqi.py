@@ -35,13 +35,13 @@ Usage:
     jingbao-fuwuqi [options]
 
 Options:
-    -h, --help          display help message
-    --version           display version and exit
-    -s, --system=NAME   system requested [default: KS-1]
+    -h, --help         display help message
+    --version          display version and exit
+    -s, --system=NAME  system requested [default: KS-1]
 """
 
 name    = "jingbao-fuwuqi"
-version = "2015-01-27T1429Z"
+version = "2016-04-04T1621Z"
 
 import docopt
 import os
@@ -49,48 +49,49 @@ import sys
 import subprocess
 import time
 import requests
-from   bs4 import BeautifulSoup
+from bs4 import BeautifulSoup
 
 def main(options):
-    timeCheck       = 15
-    systemName      = options["--system"]
-    page            = "https://www.kimsufi.com/en/"
-    unavailableText = "replenished"
-    messageAlert    = "--- ALERT: system {systemName} available now ---".format(
-        systemName  = systemName
+    time_check       = 30
+    system_name      = options["--system"]
+    #URL              = "https://www.kimsufi.com/en/"
+    URL              = "https://www.kimsufi.com/en/servers.xml"
+    unavailable_text = "Last server delivered"
+    message_alert    = "--- ALERT: system {system_name} available now ---".format(
+        system_name = system_name
     )
     while True:
-        print("check availability of system {systemName} on page {page}".format(
-            systemName = systemName,
-            page       = page
+        print("check availability of system {system_name} on page {URL}".format(
+            system_name = system_name,
+            URL         = URL
         ))
-        request     = requests.get(page)
-        pageSource  = request.text
-        soup        = BeautifulSoup(pageSource)
-        table       = soup.find("table", {"class" : "full homepage-table"})
-        tableRows   = []
+        request     = requests.get(URL)
+        page_source = request.text
+        soup        = BeautifulSoup(page_source)
+        table       = soup.find("table", {"class": "full homepage-table"})
+        table_rows  = []
         # Load the table of systems.
-        for row in table.find_all('tr'):
-            tableRows.append(row)
+        for row in table.find_all("tr"):
+            table_rows.append(row)
         # Find the row of the system requested.
-        for row in tableRows:
-            if systemName in row.text:
-                systemRow = row
-                print("    system {systemName} information detected".format(
-                    systemName = systemName
+        for row in table_rows:
+            if system_name in row.text:
+                system_row = row
+                print("    system {system_name} information detected".format(
+                    system_name = system_name
                 ))
         # Check if the system requested is not unavailable.
-        if unavailableText not in systemRow.text:
-            alert(messageAlert)
+        if unavailable_text not in system_row.text:
+            alert(message_alert)
         else:
-            print("    system {systemName} unavailable".format(
-                systemName = systemName
+            print("    system {system_name} unavailable".format(
+                system_name = system_name
             ))
         # Wait a time before checking the page again.
         print("    wait {time} seconds before checking again".format(
-            time = timeCheck
+            time = time_check
         ))
-        time.sleep(timeCheck)
+        time.sleep(time_check)
 
 def alert(message):
     print(message)
@@ -99,11 +100,11 @@ def alert(message):
 def speak(text):
     command =\
         "echo \"" +\
-        text +\
+        text      +\
         "\" | festival --tts"
     result = subprocess.check_call(
         command,
-        shell = True,
+        shell      = True,
         executable = "/bin/bash"
     )
 
