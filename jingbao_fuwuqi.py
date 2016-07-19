@@ -41,7 +41,7 @@ Options:
 """
 
 name    = "jingbao-fuwuqi"
-version = "2016-07-19T1339Z"
+version = "2016-07-19T1341Z"
 
 import docopt
 import os

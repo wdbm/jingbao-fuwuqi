@@ -7,7 +7,7 @@ This script checks in a loop for server availability. It provides a visual and v
 # quick start
 
 ```Bash
-sudo pip install jingbao_fuwuqi
 sudo apt-get -y install festival
-./jingbao_fuwuqi.py
+sudo pip install jingbao_fuwuqi
+jingbao_fuwuqi.py
 ```
