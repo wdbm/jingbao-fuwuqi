@@ -9,7 +9,7 @@ def main():
 
     setuptools.setup(
         name             = "jingbao_fuwuqi",
-        version          = "2016.07.19.1322",
+        version          = "2016.07.19.1339",
         description      = "alert when server available",
         long_description = pypandoc.convert("README.md", "rst"),
         url              = "https://github.com/wdbm/jingbao-fuwuqi",
