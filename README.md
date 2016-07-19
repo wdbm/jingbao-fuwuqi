@@ -2,12 +2,12 @@
 
 # introduction
 
-This script checks in a loop for server availability. It provides a visual and verbal alert on detection of availability. This script has been tested on Ubuntu 14.10.
+This script checks in a loop for server availability. It provides a visual and verbal alert on detection of availability. This script has been tested on Ubuntu 16.04.
 
 # quick start
 
 ```Bash
-sudo apt-get -y install docopt
+sudo pip install jingbao_fuwuqi
 sudo apt-get -y install festival
-python jingbao-fuwuqi.py
+./jingbao_fuwuqi.py
 ```
