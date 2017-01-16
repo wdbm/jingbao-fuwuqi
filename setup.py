@@ -9,12 +9,12 @@ def main():
 
     setuptools.setup(
         name             = "jingbao_fuwuqi",
-        version          = "2016.07.19.1341",
+        version          = "2017.01.16.1621",
         description      = "alert when server available",
-        long_description = pypandoc.convert("README.md", "rst"),
+        long_description = long_description(),
         url              = "https://github.com/wdbm/jingbao-fuwuqi",
         author           = "Will Breaden Madden",
-        author_email     = "w.bm@cern.ch",
+        author_email     = "wbm@protonmail.ch",
         license          = "GPLv3",
         py_modules       = [
                            "jingbao_fuwuqi"
@@ -32,9 +32,19 @@ def main():
         """
     )
 
-def read(*paths):
-    with open(os.path.join(*paths), "r") as filename:
-        return filename.read()
+def long_description(
+    filename = "README.md"
+    ):
+
+    if os.path.isfile(os.path.expandvars(filename)):
+        try:
+            import pypandoc
+            long_description = pypandoc.convert_file(filename, "rst")
+        except ImportError:
+            long_description = open(filename).read()
+    else:
+        long_description = ""
+    return long_description
 
 if __name__ == "__main__":
     main()
